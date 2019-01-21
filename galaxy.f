@@ -42,7 +42,6 @@ c
 
 c external
       character elapsd*24
-      real*8 Phitot
 c
 c local variables
       character*80 line
@@ -52,9 +51,8 @@ c local variables
       integer m_sp, n_sp, isnapfreq, ileap, iq,j,k
       parameter ( m_sp = 1000000, isnapfreq = 1)
       integer nnsn
-      real sn( m_sp * 3), snv( m_sp * 3 ), mass( m_sp )
+      real sn( m_sp * 3), snv( m_sp * 3 ), mass( m_sp ), mpot( m_sp )
       real tmpcord(3)
-      real*8 mphi(m_sp),tmpr
 c
       call setnag
 c read run number from standard input and open main ASCII I/O files
@@ -142,8 +140,7 @@ c find coords of the selected particles for their positions and velocities
          snv(3*j+2)=ptcls(i+5)*gvfac
          snv(3*j+3)=ptcls(i+6)*gvfac
          mass(j)=ptcls(i+7)
-         tmpr=sqrt(sn(3*j+1)**2+sn(3*j+2)**2)
-         mphi(j)=Phitot(tmpr)
+         mpot(j)=potgrd(sn(3*j+1),sn(3*j+2),sn(3*j+3))
         end do
         n_sp=j+1
         print*,irun,'SNAP',istep,n_sp,(istep*ts)
@@ -151,7 +148,7 @@ c find coords of the selected particles for their positions and velocities
         write(nnsn)(sn(iq),iq=1,n_sp*3)
         write(nnsn)(snv(iq),iq=1,n_sp*3)
         write(nnsn)(mass(iq),iq=1,n_sp)
-        write(nnsn)(mphi(iq),iq=1,n_sp)
+        write(nnsn)(mpot(iq),iq=1,n_sp)
 
 c move particles
         call step
