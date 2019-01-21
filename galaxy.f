@@ -42,6 +42,7 @@ c
 
 c external
       character elapsd*24
+      real potgrd
 c
 c local variables
       character*80 line
