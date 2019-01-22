@@ -53,7 +53,7 @@ c local variables
       parameter ( m_sp = 1000000, isnapfreq = 1)
       integer nnsn
       real sn( m_sp * 3), snv( m_sp * 3 ), mass( m_sp ), mpot( m_sp )
-      real tmpcord(3)
+      real tmpcord(3),tmpp
 c
       call setnag
 c read run number from standard input and open main ASCII I/O files
@@ -132,16 +132,17 @@ c find coords of the selected particles for their positions and velocities
           j=i / ( nwpp * ileap )
          if( j .gt. m_sp ) stop 'j is tooo large'
            do k = 1, 3
-           tmpcord(k) = ptcls( i + k )-0.5*ptcls( i+k+3)
+           tmpcord(k) = ptcls(i+k) - 0.5 * ptcls(i+k+3)
            end do
-         sn(3*j+1)=(tmpcord(1)-xcen(1,1))/lscale
-         sn(3*j+2)=(tmpcord(2)-xcen(2,1))/lscale
-         sn(3*j+3)=(tmpcord(3)-xcen(3,1))/lscale
-         snv(3*j+1)=ptcls(i+4)*gvfac
-         snv(3*j+2)=ptcls(i+5)*gvfac
-         snv(3*j+3)=ptcls(i+6)*gvfac
-         mass(j)=ptcls(i+7)
-         mpot(j)=potgrd(sn(3*j+1),sn(3*j+2),sn(3*j+3))
+          sn(3*j+1)=(tmpcord(1)-xcen(1,1))/lscale
+          sn(3*j+2)=(tmpcord(2)-xcen(2,1))/lscale
+          sn(3*j+3)=(tmpcord(3)-xcen(3,1))/lscale
+          snv(3*j+1)=ptcls(i+4)*gvfac
+          snv(3*j+2)=ptcls(i+5)*gvfac
+          snv(3*j+3)=ptcls(i+6)*gvfac
+          mass(j)=ptcls(i+7)
+c if out of grid, pot is zero (~/lib15/potgrd.f)
+          mpot(j)=potgrd(sn(3*j+1),sn(3*j+2),sn(3*j+3))
         end do
         n_sp=j+1
         print*,irun,'SNAP',istep,n_sp,(istep*ts)
