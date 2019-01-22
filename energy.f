@@ -6,8 +6,8 @@
       integer m_sp, n_sp, snp, irun, istep, ileap, iq
       integer nnsn,nnch
       parameter( m_sp =1000000)
-      real sn(m_sp*3), snv(m_sp*3), mass(m_sp), ke(m_sp), mpot(m_sp), tmptime
-      integer setstep, iunit
+      real sn(m_sp*3), snv(m_sp*3), mass(m_sp), ke(m_sp), mpot(m_sp)
+      integer setstep, iunit, tmptime
       character*20 filename
       character*3 arg
       real*8 pi

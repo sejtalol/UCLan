@@ -6,8 +6,8 @@
       integer m_sp, n_sp, snp, irun, istep, ileap, iq
       integer nnsn,nnch
       parameter( m_sp =1000000)
-      real sn(m_sp*3), snv(m_sp*3), mass(m_sp), mang(m_sp), tmptime
-      integer setstep, iunit
+      real sn(m_sp*3), snv(m_sp*3), mass(m_sp), mpot(m_sp), mang(m_sp)
+      integer setstep, iunit, tmptime
       character*20 filename
       character*3 arg
       real*8 pi
@@ -54,8 +54,8 @@ c      enddo
        print *,istep
 
        do i=1,n_sp,1
-          ang(i)=mass(i)*(sn(3*i-2)*snv(3*i-1)-sn(3*i-1)*snv(3*i-2))
-          write(nnch,10) sn(3*i-2),sn(3*i-1),sn(3*i),ang(i)
+          mang(i)=mass(i)*(sn(3*i-2)*snv(3*i-1)-sn(3*i-1)*snv(3*i-2))
+          write(nnch,10) sn(3*i-2),sn(3*i-1),sn(3*i),mang(i)
 10        format(2X,F14.8,F14.8,F14.8,F14.8)
        enddo
 
