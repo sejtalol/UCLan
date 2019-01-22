@@ -32,6 +32,7 @@ c here iunit is the time
       read(nnsn)(sn(iq),iq=1,n_sp*3)
       read(nnsn)(snv(iq),iq=1,n_sp*3)
       read(nnsn)(mass(iq),iq=1,n_sp)
+      read(nnsn)(mpot(iq),iq=1,n_sp)
       
 c      do i=1,n_sp,1
 c         ri(i)=sqrt(sn(3*i-2)*sn(3*i-2)+sn(3*i-1)*sn(3*i-1))
