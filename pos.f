@@ -38,7 +38,7 @@ c         ri(i)=sqrt(sn(3*i-2)*sn(3*i-2)+sn(3*i-1)*sn(3*i-1))
 c      enddo
 
        nnch=36
-       write(filename,"('ptinfo_t',I3.3,'.dat')")iunit
+       write(filename,"('pos_t',I3.3,'.dat')")iunit
        open(nnch,file=filename,status='unknown')
 
        do 
@@ -53,8 +53,8 @@ c      enddo
        print *,istep
 
        do i=1,n_sp,1
-        write(nnch,10) sn(3*i-2),sn(3*i-1),sn(3*i),mass(i),mpot(i)
-10      format(2X,F14.8,F14.8,F14.8,F14.8,F14.8)
+        write(nnch,10) sn(3*i-2),sn(3*i-1),sn(3*i),mpot(i)
+10      format(2X,F14.8,F14.8,F14.8,F14.8)
        enddo
 
        end
