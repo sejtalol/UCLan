@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 for number in {0..200..1}
 do
-nice +19 ./ang $number
+	./ang $number
 done
 
 mv ./ang_t*.dat ./data/
