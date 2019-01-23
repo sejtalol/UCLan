@@ -142,7 +142,7 @@ c find coords of the selected particles for their positions and velocities
           snv(3*j+3)=ptcls(i+6)*gvfac
           mass(j)=ptcls(i+7)
 c if out of grid, pot is zero (~/lib15/potgrd.f)
-          mpot(j)=potgrd(sn(3*j+1),sn(3*j+2),sn(3*j+3))
+          mpot(j)=potgrd(sn(3*j+1),sn(3*j+2),sn(3*j+3))*gvfac**2
         end do
         n_sp=j+1
         print*,irun,'SNAP',istep,n_sp,(istep*ts)
