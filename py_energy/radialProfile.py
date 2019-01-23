@@ -7,7 +7,7 @@ def azimuthalAverage(x, y, phi, bin_size):
     # Get sorted radii
     ind = np.argsort(r.flat)
     r_sorted = r.flat[ind]
-    i_sorted = image.flat[ind]
+    i_sorted = phi.flat[ind]
 
     # Get the integer part of the radii
     r_sorted = r_sorted / bin_size
