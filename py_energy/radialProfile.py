@@ -1,29 +1,16 @@
 import numpy as np
 
-def azimuthalAverage(image, center=None):
-    """
-    Calculate the azimuthally averaged radial profile.
+def azimuthalAverage(x, y, phi, bin_size):
 
-    image - The 2D image
-    center - The [x,y] pixel coordinates used as the center. The default is 
-             None, which then uses the center of the image (including 
-             fracitonal pixels).
-    
-    """
-    # Calculate the indices from the image
-    y, x = np.indices(image.shape)
-
-    if not center:
-        center = np.array([(x.max()-x.min())/2.0, (x.max()-x.min())/2.0])
-
-    r = np.hypot(x - center[0], y - center[1])
+    r = np.hypot(x, y)
 
     # Get sorted radii
     ind = np.argsort(r.flat)
     r_sorted = r.flat[ind]
     i_sorted = image.flat[ind]
 
-    # Get the integer part of the radii (bin size = 1)
+    # Get the integer part of the radii
+    r_sorted = r_sorted / bin_size
     r_int = r_sorted.astype(int)
 
     # Find all pixels that fall within each radial bin.
@@ -35,6 +22,6 @@ def azimuthalAverage(image, center=None):
     csim = np.cumsum(i_sorted, dtype=float)
     tbin = csim[rind[1:]] - csim[rind[:-1]]
 
-    radial_prof = tbin / nr
+    radial_prof = tbin / nr * bin_size
 
     return radial_prof
