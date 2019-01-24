@@ -1,5 +1,8 @@
-parameter info in inc file
-
+parameter info: inc file
+------------------------
+gvfac2 = gvfac * gvfac
+pmfac = pmass / ( lscale**3 * ts**2 )
+------------------------
 usage set_scale.f
 include 'inc/admin.f'
 c choose scaling to GALAXY units
