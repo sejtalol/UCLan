@@ -1,0 +1,17 @@
+Parameters
+-----
+~~~
+gvfac2 = gvfac * gvfac  
+pmfac = pmass / ( lscale**3 * ts**2 )  
+~~~
+
+Set_scale.f
+------------------------
+~~~
+include 'inc/admin.f'  
+c choose scaling to GALAXY units  
+      call set_scale  
+      lunit = lunit / unit_L  
+      munit = munit * 1.e-10 / unit_M  
+      vunit = vunit / unit_V
+~~~   
