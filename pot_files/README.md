@@ -11,6 +11,56 @@ It should be a 4 letter keyword, appended to the list in subroutine **datnam**, 
 
 Then edit the **setrun** file, to enable it to be controlled from the .dat file. Again it will require a new keyword for input together with 1 or 2 values that will control the analysis.
 
+setrun.f
+----
+>data a / 'LSCA', 'ICMP', 'TIME', 'ANAL', 'SAVE', 'UQMA', 'ZONE', 'GUAR', 'CNTD', 'PERT', 'SUPP', 'PLOT', 'LGSP', 'DVEL', 'HVEL', 'HBIN', 'SPHB', 'ZANL', 'MONI', 'ZPRF', 'RNGS', 'RHOR', 'OFFG', 'REST', 'FRQS', 'END ', 'trap' /  
+  
+LSCA = lscale  
+ICMP = i component icmp 
+#####use setp(N,icmp) to label the following keywords  
+>1.NPAR = number of particles in this pop (nsp(icmp))  
+2.STAR = start type instructions for given pop  
+3.PGRD = grid number for this pop (igrd(icmp))  
+4.Z0IN = vertical thickness of pop (z0init(icmp))  
+5.CPOP = Population center (comi(i, icmp), i = 1, 3)   
+6.VPOP = Population velocity (comi(i, icmp), i = 4, 6)  
+7.TAPE = optional disk outer taper (Lztapr(icmp)=.True.)  
+
+TIME = length of timestep (ts)  
+ANAL = iphys determines the number of time-steps between model analyses (iphys)  
+SAVE = hysical data are to be saved on a file  
+>**DANL**: sectoral harmonic coeffcients on each grid ring (p2d and p3d only), danl=.True.  
+>**DNST**: the density of particles assigned to the grid, which is usually projected to the mid-plane, dnst = .true.  
+>**FRQS**: optional keyword requesting that the values of omega, kappa, and (if 3D) nu be evaluated at a set of radii from azimuthally averaged forces in the mid-plane of the simulation (manual eq. 121). Requires a parameter which is the number of values to be computed per scale length (e.g. 20).  
+>**INTG**: total of kinetic and potential energies, virial of Clausius, angular momenta, linear momenta, and center of mass, computed separately for each population of each particles, as well as Ostriker's t value (manual eq. 127).  
+>**MOIT**: compute the moment of inertia tensor for non-disk particle populations (manual eq. 122). The particles of each population are divided into 10 groups ranked by their binding energies and the MoI tensor computed for each.
+>**PNTL**: the values of potential at every grid point.
+>**S3DC**: the values of coefficients of the surface harmonic expansion used in the S3D method only.
+>**LVAL**  
+>**UQMA**: variable particle mass (uqmass)  
+>**ZONE**: number and radii of zones (nzones)  
+>**GUAR**: guard radii (nguard)  
+>**CNTD**: grid cener option (icstp = time step integral between grid recenterings, j = indicate which rule is to be used to find the center, e.g. ltroid, lbind, lheavy)
+>**PERT**: perturbing or central mass option (pertbn).  
+>>Option 'BAR' = a rigid bar that is a homogeneous, prolate spheroid assumed centered on the grid and rotating about its minor axis. More values are the bar mass, the bar semi-major axis, its initial value of patter speed, and the bar ellipticity.  
+>>Option 'SPIR' = a rigid spiral pattern to perturb the disk. The two further values are the spiral pattern speed and an amplitude scale.  
+>>Option 'GNRC' a generic perturber (see manual).
+>>Halo: a rigid external perturber, ask for mass, scale, and POSition and VELOcity.  
+>**SUPP**: supplementary forces (suppl). To supplement the central attraction on each particle with the difference from the theoretical Newtonian attraction and the mean centralattraction of the start.  
+>**REST**: recnetering options at outset only (netcom, netlmo).  
+>**PLOT**: step interval for plot file (ipict). The maxium number saved for this analysis never exceeds 10^4 in each component.  
+>**LGSP**: logarithmic spirals to be determined. Optional keywords are (i) the number of different pitch angles (np), and (ii) the number of sectoral harmonics for this analysis (nm).  
+>**DVEL**: control parameters for analysis of disc particle velocity field. Optional keyword requesting the first and second moments be computed in cylindrical polar bins (ndrad, ndang).  
+>**HVEL**:control parameters for analysis of halo particle velocity field (vflh, nhrbin, nhzbin).  
+>**HBIN**: number of angular momentum bins (angm, maxLz).  
+>**SPHB**: spherical Bessel functions (jnmax, jlmax, s3lmax, s3ntm, sphb).  
+>**ZANL**: azimuthal mid-plane variations (vertical bending anlysis) (nrz, nmz, zanl).  
+>**MONI**: particle monitoring for integral conservation - input is sride (moni, nmskip).  
+>**ZPRF**: vertical profile analysis for disk.  
+>**RNGS**: rings option, introduce rings of massless test particles.  
+>**RHOR**: density profile option (mprho, rhor).  
+>**OFFG**: off-grid particle option (offanl, offor, offthf, offmnp).  
+
 Parameters
 ----
 >gvfac2 = gvfac * gvfac  
@@ -115,14 +165,14 @@ ZANL - normalized results of the sectorial bending analysis
 ##Integrals of a sample of particles (MONI) in _phyprp.f_
 ipp = i component 
 cm = center of mass  
-pp = linear momentum  
-ang = angular momentum  
+pp = linear momenta  
+ang = angular momenta  
 for = total force  
 pe = potential energy  
 ke = kinetic energy  
 ketot = total kinetic energy (ketot = ke( 1 ) + ke( 2 ))  
 te = petot + ketot  
-claus = virial  
+claus = virial of Clausius   
 petot = total potential (petot = selfe + pe( 2 ) + pe( 1 ))  
 <blockquote> selfe = self energy of halo  
 pe( 1 ) = disk  
