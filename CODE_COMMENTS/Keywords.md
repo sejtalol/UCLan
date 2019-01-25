@@ -46,6 +46,7 @@ SAVE = hysical data are to be saved on a file
 >>Option 'SPIR' = a rigid spiral pattern to perturb the disk. The two further values are the spiral pattern speed and an amplitude scale.  
 >>Option 'GNRC' a generic perturber (see manual).
 >>Halo: a rigid external perturber, ask for mass, scale, and POSition and VELOcity.  
+ 
 >**SUPP**: supplementary forces (suppl). To supplement the central attraction on each particle with the difference from the theoretical Newtonian attraction and the mean centralattraction of the start.  
 >**REST**: recnetering options at outset only (netcom, netlmo).  
 >**PLOT**: step interval for plot file (ipict). The maxium number saved for this analysis never exceeds 10^4 in each component.  
@@ -221,4 +222,4 @@ end do
 
 ## Halo velocity & velocity dispersion (VFLH) in _phyprp.f_
 
-##Sectoral bending analysis (ZANL) in _phyprp.f_
+## Sectoral bending analysis (ZANL) in _phyprp.f_
