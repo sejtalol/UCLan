@@ -38,14 +38,14 @@ Local buffer
 ----
 The code advances particles in groups of up to 1000, keeping a wide variety of information about each in a local buffer. They are processed in the following manner:  
 <ol>
-	<li>A call to **gather** collects the next group of particles in the current chain from the main array **ptcls**. This routine places a copy of their coordinates at the start of the step in the local array **oldc** and also decodes any flags.</li>
-	<li>The accelerations to be applied to each of these particles are determined in a call to **getacc** and stored in array **acc**. They are generally interpolated from the grid and may include externally applied accelerations.</li>
-	<li>If this is an analysis step, a call to **anlgrp** will cause the contributions of this group of particles to be added to the cumulative analysis of the model. The needed initial coordinates and accelerations have previously been assemebled.</li>
-	<li>The motion of each particle is advanced in a call to **stpgrp**, which places the updated coordinates in the array **newc**. This routine also flags any particles that leave the grid at this step.</li>
-	<li>A call to **scattr** copies the updated coordinates of each particle in the group, temporarily stored in array **newc**, back to its original location in the main particle array, and updates the linked list for whichever zone they are in.</li>
-	<li>Finally, the mass of each particle at its updated position is assigned to the grid array that accumulates the masses of particles in each zone by a call to **massgn**.</li>
+	<li>A call to <b>gather</b> collects the next group of particles in the current chain from the main array <b>ptcls</b>. This routine places a copy of their coordinates at the start of the step in the local array <b>oldc</b> and also decodes any flags.</li>
+	<li>The accelerations to be applied to each of these particles are determined in a call to <b>getacc</b> and stored in array <b>acc</b>. They are generally interpolated from the grid and may include externally applied accelerations.</li>
+	<li>If this is an analysis step, a call to <b>anlgrp</b> will cause the contributions of this group of particles to be added to the cumulative analysis of the model. The needed initial coordinates and accelerations have previously been assemebled.</li>
+	<li>The motion of each particle is advanced in a call to <b>stpgrp</b>, which places the updated coordinates in the array <b>newc</b>. This routine also flags any particles that leave the grid at this step.</li>
+	<li>A call to <b>scattr</b> copies the updated coordinates of each particle in the group, temporarily stored in array <b>newc</b>, back to its original location in the main particle array, and updates the linked list for whichever zone they are in.</li>
+	<li>Finally, the mass of each particle at its updated position is assigned to the grid array that accumulates the masses of particles in each zone by a call to <b>massgn</b>.</li>
 </ol>
 
 off-grid particles
 ----
-if the evolution remains of interest after a significant fraction (5%) of the particles have left the grid, the user should restart the simulation with a smaller value of **lscale** in order that the initial particle distribution occupies a smaller fraction of the grid volume.
+if the evolution remains of interest after a significant fraction (5%) of the particles have left the grid, the user should restart the simulation with a smaller value of <b>lscale</b> in order that the initial particle distribution occupies a smaller fraction of the grid volume.
