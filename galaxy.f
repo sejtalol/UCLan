@@ -49,11 +49,17 @@ c local variables
       integer i, ilast, jrun
       real t
 
-      integer m_sp, n_sp, isnapfreq, ileap, iq,j,k
-      parameter ( m_sp = 1000000, isnapfreq = 1)
+      integer n_sp, isnapfreq, ileap, iq,j,k
+      parameter (isnapfreq = 1)
+c Zhong Liu
+      integer m_sp
+      parameter(m_sp = 1000000)
+      real*8 mang(m_sp), mpe(m_sp), mte(m_sp)
+      common /myanls/ mang, mpe, mte
       integer nnsn
-      real sn( m_sp * 3), snv( m_sp * 3 ), mass( m_sp ), mpot( m_sp )
-      real tmpcord(3),tmpp
+      real sn( m_sp * 3), snv( m_sp * 3 )
+c      real mass( m_sp ), mang( m_sp ), mpot( m_sp )
+      real tmpcord(3)
 c
       call setnag
 c read run number from standard input and open main ASCII I/O files
@@ -124,6 +130,7 @@ c main time-step sequence
 c save density information before it is used
         if( phys )call densty
 c calculate gravitational field
+c if phys = .true. (i.e. analysis step), potential will be calculated
         call findf( phys )
 c find coords of the selected particles for their positions and velocities
         if( isnapfreq .ne. 1) stop 'isnapfreq .ne. 1'
@@ -140,20 +147,22 @@ c find coords of the selected particles for their positions and velocities
           snv(3*j+1)=ptcls(i+4)*gvfac
           snv(3*j+2)=ptcls(i+5)*gvfac
           snv(3*j+3)=ptcls(i+6)*gvfac
-          mass(j)=ptcls(i+7)
-c if out of grid, pot is zero (~/lib15/potgrd.f)
-          mpot(j)=potgrd(sn(3*j+1),sn(3*j+2),sn(3*j+3))*gvfac**2
         end do
         n_sp=j+1
         print*,irun,'SNAP',istep,n_sp,(istep*ts)
         write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
         write(nnsn)(sn(iq),iq=1,n_sp*3)
         write(nnsn)(snv(iq),iq=1,n_sp*3)
-        write(nnsn)(mass(iq),iq=1,n_sp)
-        write(nnsn)(mpot(iq),iq=1,n_sp)
+c        write(nnsn)(mang(iq),iq=1,n_sp)
+c        write(nnsn)(mpot(iq),iq=1,n_sp)
 
 c move particles
         call step
+c write down (ang still not stepped, for double check) Zhong Jan 28 2019
+        write(nnsn)(mang(iq),iq=1, n_sp)
+        write(nnsn)(mpe(iq),iq=1, n_sp)
+        write(nnsn)(mte(iq),iq=1, n_sp)
+c
         if( phys .and. master )then
           close( unit = nphys )
           call opnfil( nphys, 'res', 'unformatted', 'old', 'append', i )

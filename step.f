@@ -68,10 +68,10 @@ c allocatable arrays for analysis
       real, allocatable :: zpbin(:,:)
 c
 c common blocks by Zhong
-      integer m_sp
+      integer m_sp, is
       parameter(m_sp = 1000000)
       real*8 mang(m_sp), mpe(m_sp), mte(m_sp)  
-      common /myanls/ mang, mpe, nmax
+      common /myanls/ mang, mpe, mte
 c local variables
       integer i, j, jst, n
       logical firsth
@@ -81,6 +81,14 @@ c
      +            )call crash( 'STEP', 'Coordinates not time centered' )
       if( .not. lzones )call crash( 'STEP',
      +                   'Velocities not adjusted for time step zones' )
+c Zhong Jan 28 initialize
+      if( phys ) then
+              do i = 1, m_sp
+                mang( m_sp ) = 0.
+                mpe( m_sp ) = 0.
+                mte( m_sp ) = 0.
+              end do
+      end if
 c initialize analysis if requested
       if( phys )then
 c        nact = 0
@@ -194,6 +202,7 @@ c work through groups of particles
 c get accelerations
           call getacc( jst )
 c analysis
+c write in the arrays in anlgrp.f
           if( phys )then
             call anlgrp( jst, nact, lprop, prop, nbplot, dispy,
      +                   lglen, alspi, jlen, besc, nLbin, nLa,

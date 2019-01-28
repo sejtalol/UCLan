@@ -3,6 +3,8 @@
      +                   lzman, zman, lzpr, zpbin, lmoni, ehmon,
      +                   nwring, wring, llz, Lzval )
 c  Copyright (C) 2014, Jerry Sellwood
+c  revise Zhong 2019
+      use aarrays
       implicit none
 c main analysis routine: it adds the contribution of current group of
 c   particles to many different analysis procedures.
@@ -33,19 +35,80 @@ c
 c
       include 'inc/buffer.f'
 c
+      include 'inc/grids.f'
+c
+c externals
+      real axipot, halpot, phcorr, satpot
+c
 c local allocatable array for time centered coordinates
       real, allocatable :: coords( :,: )
 c
-c local variable
-      integer is
+c common blocks by Zhong
+      integer m_sp
+      parameter(m_sp = 1000000)
+      real*8 mang(m_sp), mpe(m_sp), mte(m_sp)
+      common /myanls/ mang, mpe, mte
+c local variable (see emngrp.f)
+      integer is, i, j, kgrd
+      real Lz, ke, pe, x, y, z, vx, vy, vz, r
+c      logical lfirst
+c      save lfirst
+c      data lfirst / .true. /
 c
 c allocate space
       allocate ( coords( 6, mbuff ) )
 c get time-centered coordindates
       call cencds( jst, coords )
 c
-c integral conservation check
-      call icheck( jst, coords, lmoni, ehmon, llz, Lzval )
+c Zhong Liu save results before the movement
+c Jan 28 2019, ref to scattr.f, energy calculation in emngrp.f
+      do is = 1, jst
+        do i = 1, 6
+         coords( i, is ) = oldc( i, is )
+        end do
+      end do
+c work through group
+      do is = 1, jst
+c ignore test particles
+        if( .not. testp( iflag( is ) ))then
+            kgrd = label( is )
+c compute particle's specific energy
+            ke = 0
+            pe = 0
+            r = 0
+            do i = 1, ndimen
+               r = r + ( coords( i, is ) - xcen( i, kgrd ) )**2
+               ke = ke + .5 * coords( i + ndimen, is )**2
+            end do
+            r = sqrt( r )
+c exclude particles far from the current center (not doing here)
+c            if( r .lt. lscale)then
+               pe = pe + gpot( is )
+               if( pertbn )pe = pe + satpot( is )
+               if( fixrad .or. suppl .or. rigidh )then
+                   r = 0
+                   do i = 1, ndimen
+                     r = r + coords( i, is)**2
+                   end do
+                   r = sqrt( r )
+                   if( fixrad )pe = pe + axipot( r )
+                   if( suppl  )pe = pe + phcorr( r )
+                   if( rigidh )pe = pe + halpot( r )
+                end if
+c angular momenta
+                Lz = coords( ndimen + 2, is ) * coords( 1, is ) -
+     +         coords( ndimen + 1, is ) * coords( 2, is)
+                Lz = pwt( is ) * Lz
+        end if
+        j = loc( is ) / nwpp + 1
+c should check this angular momentum
+        mang( j ) = Lz * gvfac / lscale
+        mpe( j ) = pe * gvfac**2
+        mte( j ) = ( pe + ke ) * gvfac**2
+      end do     
+c
+c  integral conservation check
+       call icheck( jst, coords, lmoni, ehmon, llz, Lzval )
 c
 c create picture file if requested
       if( plot )call disply( jst, coords, nbplot, dispy )
