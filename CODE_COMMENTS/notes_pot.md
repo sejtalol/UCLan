@@ -27,10 +27,23 @@ c parameter test
         end if
 ~~~
 
-This is impossible because parameters are not declared. So we need global variables to read them out.
+This is impossible because parameters are not declared. So we need global variables to read them out.  
 
-in step.f,
->integer m_sp
->parameter(m_sp=1000000)  
+Solution
+----
+in galaxy.f, step.f, anlgrp.f, create common blocks  
+
+>integer m_sp  
+>parameter(m_sp=1000000) 
 >real*8 mang(m_sp), mpe(m_sp), mte(m_sp)  
->common /myanls/ mang, mpe, nmax
+>common /myanls/ mang, mpe, mte  
+
+This records angular momentum (for double check), potential energy (also with some extra contribution), and total energy (potential energy + kinetic energy)  
+
+The actual location of each particle is recorded by array <b>loc( is ) = inext</b>. Therefore the position of each particle in the buffer should be <b>j = loc(is) / nwpp + 1 </b>th particle in the ptcls array.  
+
+Therefore we have the <b>position (ptcls(inext + i), i = 1, 3)</b>, <b>velocity (ptcls(inext + i), i = 4, 6)</b>, and the <b>mass weight pwt(is) = ptcls(inext + 7)</b>. <b>nwpp</b> should be length of each record = 7.  
+
+The routine is written in anlgrp.f, also initialize each potential array at step.f.  
+
+Do we need to write down the position and velocity at each step? No!  
