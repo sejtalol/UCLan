@@ -148,21 +148,23 @@ c find coords of the selected particles for their positions and velocities
           snv(3*j+2)=ptcls(i+5)*gvfac
           snv(3*j+3)=ptcls(i+6)*gvfac
         end do
-        n_sp=j+1
-        print*,irun,'SNAP',istep,n_sp,(istep*ts)
-        write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
-        write(nnsn)(sn(iq),iq=1,n_sp*3)
-        write(nnsn)(snv(iq),iq=1,n_sp*3)
-c        write(nnsn)(mang(iq),iq=1,n_sp)
-c        write(nnsn)(mpot(iq),iq=1,n_sp)
-
+        if(phys)then
+                n_sp=j+1
+                print*,irun,'SNAP',istep,n_sp,(istep*ts)
+                write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
+                write(nnsn)(sn(iq),iq=1,n_sp*3)
+                write(nnsn)(snv(iq),iq=1,n_sp*3)
+c               write(nnsn)(mang(iq),iq=1,n_sp)
+c               write(nnsn)(mpot(iq),iq=1,n_sp)
+        end if
 c move particles
         call step
 c write down (ang still not stepped, for double check) Zhong Jan 28 2019
-        write(nnsn)(mang(iq),iq=1, n_sp)
-        write(nnsn)(mpe(iq),iq=1, n_sp)
-        write(nnsn)(mte(iq),iq=1, n_sp)
-c
+        if(phys)then
+                write(nnsn)(mang(iq),iq=1, n_sp)
+                write(nnsn)(mpe(iq),iq=1, n_sp)
+                write(nnsn)(mte(iq),iq=1, n_sp)
+        end if
         if( phys .and. master )then
           close( unit = nphys )
           call opnfil( nphys, 'res', 'unformatted', 'old', 'append', i )
