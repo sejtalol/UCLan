@@ -54,7 +54,7 @@ c local variables
 c Zhong Liu
       integer m_sp
       parameter(m_sp = 1000000)
-      real*8 mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)
+      real mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)
       common /myanls/ mass, mang, mpe, mte
       integer nnsn
       real sn( m_sp * 3), snv( m_sp * 3 )
@@ -149,14 +149,15 @@ c find coords of the selected particles for their positions and velocities
                snv(3*j+3) = ptcls(i+6)*gvfac
             end do
             n_sp = j + 1
-c           print*,irun,'SNAP',istep,n_sp,(istep*ts)
+            print*,irun,'SNAP',istep,n_sp,(istep*ts)
+c            print*, 'before step', istep
             write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
             write(nnsn)(sn(iq),iq=1,n_sp*3)
             write(nnsn)(snv(iq),iq=1,n_sp*3)
         end if
 c move particles
         call step
-c write down (ang still not stepped, for double check) Zhong Jan 28 2019
+c write down Zhong Jan 28 2019
         if(phys)then
 c analysis step
 c                do i = 1, n_sp
@@ -164,6 +165,11 @@ c                  print *, 'after step'
 c                  print *, 'mass=', mass(i), 'ang=', mang(i)
 c                  print *, 'pe=', mpe(i), 'te=', mte(i)
 c                end do
+c                print *, 'after step',istep
+c                write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
+c                write(nnsn)(sn(iq),iq=1,n_sp*3)
+c                write(nnsn)(snv(iq),iq=1,n_sp*3)
+                write(nnsn)(mass(iq),iq=1, n_sp)
                 write(nnsn)(mang(iq),iq=1, n_sp)
                 write(nnsn)(mpe(iq),iq=1, n_sp)
                 write(nnsn)(mte(iq),iq=1, n_sp)

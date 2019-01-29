@@ -70,7 +70,7 @@ c
 c common blocks by Zhong
       integer m_sp, is
       parameter(m_sp = 1000000)
-      real*8 mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)  
+      real mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)  
       common /myanls/ mass, mang, mpe, mte
 c local variables
       integer i, j, jst, n
