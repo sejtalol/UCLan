@@ -70,8 +70,8 @@ c
 c common blocks by Zhong
       integer m_sp, is
       parameter(m_sp = 1000000)
-      real*8 mang(m_sp), mpe(m_sp), mte(m_sp)  
-      common /myanls/ mang, mpe, mte
+      real mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)  
+      common /myanls/ mass, mang, mpe, mte
 c local variables
       integer i, j, jst, n
       logical firsth
@@ -208,7 +208,12 @@ c write in the arrays in anlgrp.f
      +                   lglen, alspi, jlen, besc, nLbin, nLa,
      +                   lzman, zman, lzpr, zpbin, lmoni, ehmon,
      +                   nwring, wring, llz, Lzval )
-          end if
+c analysis step
+c          do i = 1, jst
+c           print *, 'in step .........'
+c           print *, 'mass=', mass(i) , 'ang=', mang(i), 'mte', mte(i)
+c          end do
+        end if
 c step forward
           call stpgrp( jst )
 c rezone
