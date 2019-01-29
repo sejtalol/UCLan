@@ -46,4 +46,11 @@ Therefore we have the <b>position (ptcls(inext + i), i = 1, 3)</b>, <b>velocity 
 
 The routine is written in anlgrp.f, also initialize each potential array at step.f.  
 
-Do we need to write down the position and velocity at each step? No!  
+Do we need to write down the position and velocity at each step? No! 
+
+Still needs to do
+------
+<ol>
+	<li>Fortran output file: revised to wrtie in loop</li>
+	<li>phys or without phys</li>
+</ol>
