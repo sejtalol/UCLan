@@ -42,7 +42,7 @@ c
 
 c external
       character elapsd*24
-      real potgrd
+c      real potgrd
 c
 c local variables
       character*80 line
@@ -54,11 +54,10 @@ c local variables
 c Zhong Liu
       integer m_sp
       parameter(m_sp = 1000000)
-      real*8 mang(m_sp), mpe(m_sp), mte(m_sp)
-      common /myanls/ mang, mpe, mte
+      real*8 mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)
+      common /myanls/ mass, mang, mpe, mte
       integer nnsn
       real sn( m_sp * 3), snv( m_sp * 3 )
-c      real mass( m_sp ), mang( m_sp ), mpot( m_sp )
       real tmpcord(3)
 c
       call setnag
@@ -134,33 +133,37 @@ c if phys = .true. (i.e. analysis step), potential will be calculated
         call findf( phys )
 c find coords of the selected particles for their positions and velocities
         if( isnapfreq .ne. 1) stop 'isnapfreq .ne. 1'
-        ileap = 1
-        do i = 0, lpf, nwpp*ileap
-          j=i / ( nwpp * ileap )
-         if( j .gt. m_sp ) stop 'j is tooo large'
-           do k = 1, 3
-           tmpcord(k) = ptcls(i+k) - 0.5 * ptcls(i+k+3)
-           end do
-          sn(3*j+1)=(tmpcord(1)-xcen(1,1))/lscale
-          sn(3*j+2)=(tmpcord(2)-xcen(2,1))/lscale
-          sn(3*j+3)=(tmpcord(3)-xcen(3,1))/lscale
-          snv(3*j+1)=ptcls(i+4)*gvfac
-          snv(3*j+2)=ptcls(i+5)*gvfac
-          snv(3*j+3)=ptcls(i+6)*gvfac
-        end do
+        ileap = 1.
         if(phys)then
-                n_sp=j+1
-                print*,irun,'SNAP',istep,n_sp,(istep*ts)
-                write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
-                write(nnsn)(sn(iq),iq=1,n_sp*3)
-                write(nnsn)(snv(iq),iq=1,n_sp*3)
-c               write(nnsn)(mang(iq),iq=1,n_sp)
-c               write(nnsn)(mpot(iq),iq=1,n_sp)
+           do i = 0, lpf, nwpp*ileap
+               j=i / ( nwpp * ileap )
+               if( j .gt. m_sp ) stop 'j is tooo large'
+               do k = 1, 3
+                   tmpcord(k) = ptcls(i+k) - 0.5 * ptcls(i+k+3)
+               end do
+               sn(3*j+1) = (tmpcord(1)-xcen(1,1))/lscale
+               sn(3*j+2) = (tmpcord(2)-xcen(2,1))/lscale
+               sn(3*j+3) = (tmpcord(3)-xcen(3,1))/lscale
+               snv(3*j+1) = ptcls(i+4)*gvfac
+               snv(3*j+2) = ptcls(i+5)*gvfac
+               snv(3*j+3) = ptcls(i+6)*gvfac
+            end do
+            n_sp = j + 1
+c           print*,irun,'SNAP',istep,n_sp,(istep*ts)
+            write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
+            write(nnsn)(sn(iq),iq=1,n_sp*3)
+            write(nnsn)(snv(iq),iq=1,n_sp*3)
         end if
 c move particles
         call step
 c write down (ang still not stepped, for double check) Zhong Jan 28 2019
         if(phys)then
+c analysis step
+c                do i = 1, n_sp
+c                  print *, 'after step'
+c                  print *, 'mass=', mass(i), 'ang=', mang(i)
+c                  print *, 'pe=', mpe(i), 'te=', mte(i)
+c                end do
                 write(nnsn)(mang(iq),iq=1, n_sp)
                 write(nnsn)(mpe(iq),iq=1, n_sp)
                 write(nnsn)(mte(iq),iq=1, n_sp)

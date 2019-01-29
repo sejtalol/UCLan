@@ -46,8 +46,8 @@ c
 c common blocks by Zhong
       integer m_sp
       parameter(m_sp = 1000000)
-      real*8 mang(m_sp), mpe(m_sp), mte(m_sp)
-      common /myanls/ mang, mpe, mte
+      real*8 mass(m_sp),mang(m_sp), mpe(m_sp), mte(m_sp)
+      common /myanls/ mass, mang, mpe, mte
 c local variable (see emngrp.f)
       integer is, i, j, kgrd
       real Lz, ke, pe, x, y, z, vx, vy, vz, r
@@ -61,23 +61,18 @@ c get time-centered coordindates
       call cencds( jst, coords )
 c
 c Zhong Liu save results before the movement
-c Jan 28 2019, ref to scattr.f, energy calculation in emngrp.f
-      do is = 1, jst
-        do i = 1, 6
-         coords( i, is ) = oldc( i, is )
-        end do
-      end do
 c work through group
       do is = 1, jst
 c ignore test particles
-        if( .not. testp( iflag( is ) ))then
-            kgrd = label( is )
+c        if( .not. testp( iflag( is ) ))then
+c            kgrd = label( is )
 c compute particle's specific energy
             ke = 0
             pe = 0
             r = 0
             do i = 1, ndimen
-               r = r + ( coords( i, is ) - xcen( i, kgrd ) )**2
+c the coords are already time-centered in cencds.f
+               r = r + (coords( i, is ) - xcen( i, 1 ) )**2
                ke = ke + .5 * coords( i + ndimen, is )**2
             end do
             r = sqrt( r )
@@ -99,12 +94,15 @@ c angular momenta
                 Lz = coords( ndimen + 2, is ) * coords( 1, is ) -
      +         coords( ndimen + 1, is ) * coords( 2, is)
                 Lz = pwt( is ) * Lz
-        end if
+c        end if
         j = loc( is ) / nwpp + 1
 c should check this angular momentum
         mang( j ) = Lz * gvfac / lscale
         mpe( j ) = pe * gvfac**2
         mte( j ) = ( pe + ke ) * gvfac**2
+        mass( j ) = pwt( is )
+c analysis step
+c        print *, '1.mass=', mass(j) , 'ang=', mang(j), 'mte', mte(j)
       end do     
 c
 c  integral conservation check
