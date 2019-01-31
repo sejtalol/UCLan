@@ -25,9 +25,8 @@ def azimuthalAverage(x, y, phi, Rmax, bin_size):
     
     # Cumulative sum to figure out sums for each radius bin
     csim = np.cumsum(i_sorted, dtype=float)
-    print (csim)
     tbin = csim[rind[1:]] - csim[rind[:-1]]
-    print (tbin)
+    print(len(tbin))
 
     radial_prof = tbin / nr * bin_size
 
