@@ -42,8 +42,8 @@ The radial distribution of <b>Jacobi energy E<sub>J</sub> ( E<sub>J</sub> = E - 
 4.change of the Jacobi Energy
 ----
 The change of <b>Jacobi energy E<sub>J</sub> </b> in &Delta;t =10 ( <b>T = 150 ~ 160</b> )  
-E<sub>J</sub> in x-axis is the Jacobi energy at T=150;
-&Delta;E<sub>J</sub> is the difference between two times.
+E<sub>J</sub> in x-axis is the Jacobi energy at T=150;  
+&Delta;E<sub>J</sub> is the difference between two times.  
 
 <img src="./output/dEj_Ej2_t160_color.png" />                                                     
 
@@ -56,9 +56,9 @@ Possible Features:
 
 5.change of angular momentum
 ----
-The change of <b>Angular Momentum L<sub>z</sub></b> in &Delta;t =10 ( <b>T = 150 ~ 160</b> )
-L<sub>Z</sub> in x-axis is the angular momentum at T=150;
-&Delta;L<sub>Z</sub> is the difference between two times.
+The change of <b>Angular Momentum L<sub>z</sub></b> in &Delta;t =10 ( <b>T = 150 ~ 160</b> )  
+L<sub>Z</sub> in x-axis is the angular momentum at T=150;  
+&Delta;L<sub>Z</sub> is the difference between two times.  
 
 <img src="./output/da_a2_t160_color.png" />                                                     
 
