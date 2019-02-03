@@ -10,9 +10,9 @@ All the following analysis is in <b>simulation units</b>.
 
 1.Angular momentum vs. R
 ----
-The radial distribution of L<sub>Z</sub> at T = 160.
+The radial distribution of L<sub>Z</sub> at T = 150.
 
-<img src="./output/Lz_R_t160_color.png">  
+<img src="./output/Lz_R_t150_color.png">  
 
 Note: vertical dash lines show the position of <b>corotaion radius of bar (left) and spiral (right)</b>, estimated from subroutine <b>spct</b> with the pattern speed (i.e. &Omega;<sub>bar</sub> = 0.542, &Omega;<sub>spiral</sub> = 0.228).
 
@@ -24,15 +24,15 @@ We can see in this figure:
 
 2.Energy vs. R
 ----
-The radial distribution of energy ( potential + kinetic ) at T = 160.
+The radial distribution of energy ( potential + kinetic ) at T = 150.
 
-<img src="./output/Te_R_t160.png" /> 
+<img src="./output/Te_R_t150.png" /> 
 
 3.Ej vs. R
 ----
-The radial distribution of <b>Jacobi energy E<sub>J</sub> ( E<sub>J</sub> = E - &Omega;<sub>P</sub> &#10005; L<sub>Z</sub> )</b> at T = 160.  
+The radial distribution of <b>Jacobi energy E<sub>J</sub> ( E<sub>J</sub> = E - &Omega;<sub>P</sub> &#10005; L<sub>Z</sub> )</b> at T = 150.  
 
-<img src="./output/Ej_R_t160_color.png" />  
+<img src="./output/Ej_R_t150_color.png" />  
 
 <ul>
     <li>inside the <b>R<sub>CR</sub> of bar</b> --> mainly <b>E<sub>J</sub> > -6.0 ( especially around -4.0 ).</b> </li> 
@@ -45,7 +45,7 @@ The change of <b>Jacobi energy E<sub>J</sub> </b> in &Delta;t =10 ( <b>T = 150 ~
 E<sub>J</sub> in x-axis is the Jacobi energy at T=150;  
 &Delta;E<sub>J</sub> is the difference between two times.  
 
-<img src="./output/dEj_Ej2_t160_color.png" />                                                     
+<img src="./output/dEj_t150_to_160_color.png" />                                                     
 
 Possible Features:      
 <ol>
@@ -60,7 +60,7 @@ The change of <b>Angular Momentum L<sub>z</sub></b> in &Delta;t =10 ( <b>T = 150
 L<sub>Z</sub> in x-axis is the angular momentum at T=150;  
 &Delta;L<sub>Z</sub> is the difference between two times.  
 
-<img src="./output/da_a2_t160_color.png" />                                                     
+<img src="./output/da_t150_to_160_color.png" />                                                     
 
 Density peaks:  
 <ol>
