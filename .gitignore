@@ -1,4 +1,6 @@
-
+#backupfile
+GALAXY_dEj_old.ipynb
+#data file
 ptcls_info*.dat
 .vscode
 .vscode/settings.json

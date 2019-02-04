@@ -77,3 +77,23 @@ Density peaks:
     <li>Due to the wide range of the L<sub>Z</sub> and E<sub>J</sub> distribution in Radius, we are not sure whether these structures are really induced by these resonances (e.g. ILR, CR, OLR) at present.</li>
     </font>
 </ul>
+
+7.Comparison with longer time intervals ( &Delta;t = 10 and &Delta;t = 50 )
+----
+
+### Jacobi Energy
+
+<img src="./output/dEj_t150_cmp.png" />                                                     
+
+
+### Angular Momentum
+
+<img src="./output/da_t150_cmp.png" />                                                     
+
+8.Sub-structures divided by Jacobi energy
+----
+
+I used the Jacobi energy of particles at T = 150 to split the disk into six components.  
+
+Clearly, many of the particles in <b>-3.0 < E<sub>J</sub> < -2.0, and -4.0 < E<sub>J</sub> < -3.0 </b> are bar particles.  
+<img src="./output/Ej_dens_t150_cmp.png" />                                                     
