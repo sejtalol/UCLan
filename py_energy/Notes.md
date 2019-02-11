@@ -96,4 +96,17 @@ Density peaks:
 I used the Jacobi energy of particles at T = 150 to split the disk into six components.  
 
 Clearly, many of the particles in <b>-3.0 < E<sub>J</sub> < -2.0, and -4.0 < E<sub>J</sub> < -3.0 </b> are bar particles.  
-<img src="./output/Ej_dens_t150_cmp.png" />                                                     
+<img src="./output/Ej_dens_t150_cmp.png" />      
+
+9.Sub-structures divided by angular momentum
+----
+
+<img src="./output/Lz_dens_t150_cmp.png" />  
+
+Notes:
+----
+(1) is Jacobi energy calculated correctly? and/or pattern speed?  
+(2) time-centering in leap-frog?  
+(3) Victor's model  
+(4) What the small lane structure is? how these particles behave in &Delta;Lz & &Delta;Ej distribution?  
+(5) Other tests? in GALAXY_test.ipynb.  
