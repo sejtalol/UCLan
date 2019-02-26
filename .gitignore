@@ -5,4 +5,5 @@ ptcls_info*.dat
 .vscode
 .vscode/settings.json
 data
+data_bar
 data_test
