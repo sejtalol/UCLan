@@ -8,6 +8,8 @@
 
 All the following analysis is in <b>simulation units</b>.
 
+<img src="./output/Dens_xy_t150.png" />
+
 1.Angular momentum vs. R
 ----
 The radial distribution of L<sub>Z</sub> at T = 150.
@@ -30,7 +32,15 @@ The radial distribution of energy ( potential + kinetic ) at T = 150.
 
 3.Ej vs. R
 ----
-The radial distribution of <b>Jacobi energy E<sub>J</sub> ( E<sub>J</sub> = E - &Omega;<sub>P</sub> &#10005; L<sub>Z</sub> )</b> at T = 150.  
+The radial distribution of <b>Jacobi energy E<sub>J</sub></b>:   
+<img src="http://latex.codecogs.com/gif.latex?$$
+E_{J}=m\times[\frac{1}{2}|\dot{\mathbf{r}}|^{2}+\Phi-\frac{1}{2}\Omega^{2}\left(x^{2}+y^{2}\right)]$$  " border="0"/>  
+at T = 150.  
+
+<ul>
+	<li><img src="http://latex.codecogs.com/gif.latex?$$|\dot{\mathbf{r}}|^{2}$$  " border="0"/> term is in the <b>rotating frame</b>;</li>
+	<li>unequal mass is used.</li>  
+</ul>  
 
 <img src="./output/Ej_R_t150_color.png" />  
 
@@ -69,16 +79,7 @@ Density peaks:
     <li>L<sub>Z</sub> ~ 9. ( should be due to <b>the CR of spiral</b> )</li> 
 </ol>
 
-6.Notes
-----
-<ul>
-    <font size="+0.5">
-    <li>Note this is only the evolution in a very small range of particles, thus the L<sub>Z</sub> transfer around the CR of spirals <b>should be very mild</b>. If we use a longer time interval, we expect <b>the structure in L<sub>Z</sub> - &Delta;L<sub>Z</sub></b> should be more prominent for particles with L<sub>Z</sub> ~ 9. </li>
-    <li>Due to the wide range of the L<sub>Z</sub> and E<sub>J</sub> distribution in Radius, we are not sure whether these structures are really induced by these resonances (e.g. ILR, CR, OLR) at present.</li>
-    </font>
-</ul>
-
-7.Comparison with longer time intervals ( &Delta;t = 10 and &Delta;t = 50 )
+6.Comparison with longer time intervals ( &Delta;t = 10 and &Delta;t = 50 )
 ----
 
 ### Jacobi Energy
@@ -90,23 +91,36 @@ Density peaks:
 
 <img src="./output/da_t150_cmp.png" />                                                     
 
-8.Sub-structures divided by Jacobi energy
+7.Distribution of Jacobi energy in (x, y) plane (T=150)
 ----
+<img src="./output/Ej_xy_t150.png" />
 
-I used the Jacobi energy of particles at T = 150 to split the disk into six components.  
-
-Clearly, many of the particles in <b>-3.0 < E<sub>J</sub> < -2.0, and -4.0 < E<sub>J</sub> < -3.0 </b> are bar particles.  
+If dvided into several sub-populations:  
 <img src="./output/Ej_dens_t150_cmp.png" />      
 
-9.Sub-structures divided by angular momentum
+8.Distribution of angular momentum in (x, y) plane (T=150)
 ----
-
 <img src="./output/Lz_dens_t150_cmp.png" />  
 
-Notes:
+
+## Bar model
+<ul>
+	<font size="+0.5">
+	<li>Pattern speed = 0.581</li>
+	<li>no groove mode, weak spiral.</li>
+	<li>use the same range of the plots in bar-spiral model.</li>
+</ul>  
+
+<img src="../data_bar/output/Dens_xy_t150.png" />
+
+Comparison with longer time intervals ( &Delta;t = 10 and &Delta;t = 50 )
 ----
-(1) is Jacobi energy calculated correctly? and/or pattern speed?  
-(2) time-centering in leap-frog?  
-(3) Victor's model  
-(4) What the small lane structure is? how these particles behave in &Delta;Lz & &Delta;Ej distribution?  
-(5) Other tests? in GALAXY_test.ipynb.  
+
+### Jacobi Energy
+
+<img src="../data_bar/output/dEj_t150_cmp.png" />                                                     
+
+
+### Angular Momentum
+
+<img src="../data_bar/output/da_t150_cmp.png" />         
