@@ -18,12 +18,6 @@ The radial distribution of L<sub>Z</sub> at T = 150.
 
 Note: vertical dash lines show the position of <b>corotaion radius of bar (left) and spiral (right)</b>, estimated from subroutine <b>spct</b> with the pattern speed (i.e. &Omega;<sub>bar</sub> = 0.542, &Omega;<sub>spiral</sub> = 0.228).
 
-We can see in this figure:  
-<ul>
-    <li>inside the <b>R<sub>CR</sub> of bar</b> --> mainly <b>L<sub>Z</sub> < 7.5.</b> </li> 
-    <li>around the <b>R<sub>CR</sub> of spiral</b> --> mainly <b>5 < L<sub>Z</sub> < 10.</b> </li>
-</ul>
-
 2.Energy vs. R
 ----
 The radial distribution of energy ( potential + kinetic ) at T = 150.
@@ -44,11 +38,6 @@ at T = 150.
 
 <img src="./output/Ej_R_t150_color.png" />  
 
-<ul>
-    <li>inside the <b>R<sub>CR</sub> of bar</b> --> mainly <b>E<sub>J</sub> > -6.0 ( especially around -4.0 ).</b> </li> 
-    <li>around the <b>R<sub>CR</sub> of spiral</b> --> mainly <b> -7.5 < E<sub>J</sub> < -5.0. </b> </li>
-</ul>
-
 4.change of the Jacobi Energy
 ----
 The change of <b>Jacobi energy E<sub>J</sub> </b> in &Delta;t =10 ( <b>T = 150 ~ 160</b> )  
@@ -56,13 +45,6 @@ E<sub>J</sub> in x-axis is the Jacobi energy at T=150;
 &Delta;E<sub>J</sub> is the difference between two times.  
 
 <img src="./output/dEj_t150_to_160_color.png" />                                                     
-
-Possible Features:      
-<ol>
-    <li>E<sub>J</sub> ~ -3.0 ( very small fraction in bar, but is the <b>highest number density region</b> in this figure )</li>
-    <li>E<sub>J</sub> ~ -4.0 ( correspond to the <b>highest number density region in E<sub>J</sub> vs. R figure</b> )</li>
-    <li>E<sub>J</sub> ~ -5.5 ( correspond to a very wide range, not sure this structure is due to <b>the CR of spiral</b> )</li> 
-</ol>
 
 5.change of angular momentum
 ----
@@ -107,7 +89,7 @@ If dvided into several sub-populations:
 <ul>
 	<font size="+0.5">
 	<li>Pattern speed = 0.581</li>
-	<li>no groove mode, weak spiral.</li>
+	<li>setting-up is the same as the bar-spiral model except for the groove mode: no groove mode, stronger bar, weak spirals.</li>
 	<li>use the same range of the plots in bar-spiral model.</li>
 </ul>  
 
