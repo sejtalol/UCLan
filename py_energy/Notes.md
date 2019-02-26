@@ -27,8 +27,7 @@ The radial distribution of energy ( potential + kinetic ) at T = 150.
 3.Ej vs. R
 ----
 The radial distribution of <b>Jacobi energy E<sub>J</sub></b>:   
-<img src="http://latex.codecogs.com/gif.latex?$$
-E_{J}=m\times[\frac{1}{2}|\dot{\mathbf{r}}|^{2}+\Phi-\frac{1}{2}\Omega^{2}\left(x^{2}+y^{2}\right)]$$  " border="0"/>  
+<img src="./output/Latex.gif" />   
 at T = 150.  
 
 <ul>
@@ -52,14 +51,7 @@ The change of <b>Angular Momentum L<sub>z</sub></b> in &Delta;t =10 ( <b>T = 150
 L<sub>Z</sub> in x-axis is the angular momentum at T=150;  
 &Delta;L<sub>Z</sub> is the difference between two times.  
 
-<img src="./output/da_t150_to_160_color.png" />                                                     
-
-Density peaks:  
-<ol>
-    <li>L<sub>Z</sub> < 2.0 ( all of the particles are <b>inside CR of bar.</b> )</li>
-    <li>2.5 < L<sub>Z</sub> < 5.0 ( wide range of particles, not sure about the origin of these structures. But some of them should be related to <b>the CR of bar</b>. )</li>
-    <li>L<sub>Z</sub> ~ 9. ( should be due to <b>the CR of spiral</b> )</li> 
-</ol>
+<img src="./output/da_t150_to_160_color.png" />                                                
 
 6.Comparison with longer time intervals ( &Delta;t = 10 and &Delta;t = 50 )
 ----
