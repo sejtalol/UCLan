@@ -27,7 +27,7 @@ The radial distribution of energy ( potential + kinetic ) at T = 150.
 3.Ej vs. R
 ----
 The radial distribution of <b>Jacobi energy E<sub>J</sub></b>:   
-<img src="./output/Latex.gif" />   
+<img src="./output/Latex.gif" />  
 at T = 150.  
 
 <ul>
