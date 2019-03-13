@@ -10,6 +10,8 @@ All the following analysis is in <b>simulation units</b>.
 
 <img src="./output/Dens_xy_t150.png" />
 
+Here is the face-on bar-spiral model.
+
 1.Angular momentum vs. R
 ----
 The radial distribution of L<sub>Z</sub> at T = 150.
@@ -76,13 +78,18 @@ If dvided into several sub-populations:
 ----
 <img src="./output/Lz_dens_t150_cmp.png" />  
 
+9.Ej vs. Mass
+----
+<img src="./output/Ej_Mass_t150_color.png" />  
+
+NOTE: mainly around 2.0
 
 ## Bar model
 <ul>
 	<font size="+0.5">
-	<li>Pattern speed = 0.581</li>
-	<li>setting-up is the same as the bar-spiral model except for the groove mode: no groove mode, stronger bar, weak spirals.</li>
-	<li>use the same range of the plots in bar-spiral model.</li>
+	<li>Pattern speed = 0.548</li>
+	<li>No groove mode, no inner taper, initial Toomre Q = 1.8;</li>
+	<li>bar corotation radius ~ 3.4</li>
 </ul>  
 
 <img src="../data_bar/output/Dens_xy_t150.png" />
@@ -97,4 +104,22 @@ Comparison with longer time intervals ( &Delta;t = 10 and &Delta;t = 50 )
 
 ### Angular Momentum
 
-<img src="../data_bar/output/da_t150_cmp.png" />         
+<img src="../data_bar/output/da_t150_cmp.png" />     
+
+
+Notes:
+----
+For bar-spiral model:
+<ol>
+	<li>Bar particles (－4.0 < E<sub>J</sub> < -2.0) <b>conserved btter</b> than the particles around bar corotation radius (－6.0 < E<sub>J</sub> < -4.0).</li>
+	<li>We see a clear ridge around －6.0 < E<sub>J</sub> < -4.0 in E<sub>J</sub> map, this corresponds to the <b>bar corotation ~ 3.2</b>, see section 7, second fig.</li>
+	<li>Particle with Jacobi Energy -6.0 < E<sub>J</sub> < -4.0 (around the bar corotation radius) changes more significantly at longer time scale.</li>
+	<li>Also, we see the feature appears in the &Delta;E<sub>J</sub> - E<sub>J</sub> map around E<sub>J</sub> ~ -13.</li>
+	<li>As for the L<sub>Z</sub>, bar particles with angular momentum (0 < L<sub>Z</sub> < 2.0) transfered the angular momentum efficiently; while the particles around the corotation,</li>
+</ol>
+
+To compare with the bar model
+<ol>
+	<li>Only the bar-spiral model show the change of angular momentum at around L<sub>Z</sub> ~ 7.0, i.e., <b>around the spiral corotation</b>.</li>
+	<li>The feature at lager E<sub>J</sub> does not appear at longer timescale, only the particle with -6.0 < E<sub>J</sub> < -4.0 (around the bar corotation radius) changes more significantly.</li>
+</ol>
