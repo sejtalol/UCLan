@@ -35,3 +35,73 @@ Strong bar model:
 
 Weak bar model:  
 <img src="./da_t250_cmp.png" />  
+
+Dissections (A, B, C, D from right to left)
+----
+Strong bar model (&Delta;T=10):  
+<img src="../../py_energy/output/dissect/dEj_t150_to_160_color.png" />    
+
+Strong bar model (&Delta;T=50):  
+<img src="../../py_energy/output/dissect/dEj_t150_to_200_color.png" /> 
+
+Weak bar model (&Delta;T=10):  
+<img src="./dissect/dEj_t250_to_260_color.png" />    
+
+Weak bar model (&Delta;T=50):  
+<img src="./dissect/dEj_t250_to_300_color.png" />
+
+(x,y) Distributions for A, B, C, D
+----
+Strong bar model (&Delta;T=10):  
+<img src="../../py_energy/output/dissect/dEj_sect_t150to160.png" />    
+
+Strong bar model (&Delta;T=50):  
+<img src="../../py_energy/output/dissect/dEj_sect_t150to200.png" /> 
+
+Weak bar model (&Delta;T=10):  
+<img src="./dissect/dEj_sect_t250to260.png" />    
+
+Weak bar model (&Delta;T=50):  
+<img src="./dissect/dEj_sect_t250to300.png" />
+
+Distribution in L<sub>Z</sub> - &Delta;L<sub>Z</sub> for A, B, C, D
+----
+Strong bar model (&Delta;T=10):  
+<img src="../../py_energy/output/dissect/da_sect_t150to160.png" />    
+
+Strong bar model (&Delta;T=50):  
+<img src="../../py_energy/output/dissect/da_sect_t150to200.png" /> 
+
+Weak bar model (&Delta;T=10):  
+<img src="./dissect/da_sect_t250to260.png" />    
+
+Weak bar model (&Delta;T=50):  
+<img src="./dissect/da_sect_t250to300.png" />
+
+Histograms (&Delta;T = 10)
+--------
+Strong bar model (L<sub>Z</sub>):  
+<img src="../../py_energy/output/dissect/da_a_sect_t150_to_160.png" />                                            
+
+Strong bar model (E<sub>J</sub>):  
+<img src="../../py_energy/output/dissect/dEj_Ej_sect_t150_to_160.png" />    
+
+Weak bar model (L<sub>Z</sub>):  
+<img src="./dissect/da_a_sect_t250_to_260.png" />  
+
+Weak bar model (E<sub>J</sub>):  
+<img src="./dissect/dEj_Ej_sect_t250_to_260.png" />  
+
+Histograms (&Delta;T = 50)
+--------
+Strong bar model (L<sub>Z</sub>):  
+<img src="../../py_energy/output/dissect/da_a_sect_t150_to_200.png" />                                            
+
+Strong bar model (E<sub>J</sub>):  
+<img src="../../py_energy/output/dissect/dEj_Ej_sect_t150_to_200.png" />    
+
+Weak bar model (L<sub>Z</sub>):  
+<img src="./dissect/da_a_sect_t250_to_300.png" />  
+
+Weak bar model (E<sub>J</sub>):  
+<img src="./dissect/dEj_Ej_sect_t250_to_300.png" />  
