@@ -1,5 +1,6 @@
+# used to test if np.loadtxt get the correct split
 import numpy as np
-filename='ptcls_info_t400.dat'
+filename='./data_bar/ptcls_info_t400.dat'
 file=open(filename,'r')
 x1=[]
 y1=[]
