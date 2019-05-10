@@ -6,6 +6,7 @@ ptcls_info*.dat
 .vscode/settings.json
 data
 test
-test_groove
+#test_groove
+test_groove/data
 #data_bar
 #data_spiral
