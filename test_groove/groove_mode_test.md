@@ -86,3 +86,37 @@ To make a comparison with original bar-spiral model (no. 5018):
    ![da_t350_cmp_6001](./output/da_t350_cmp.png)
 To make a comparison with original bar-spiral model (no. 5018):
    ![da_t350_cmp_5018](../py_energy/output/da_t350_cmp.png)
+
+----
+
+## Model with groove added at T = 200 (No. 6002)
+
+#### test using different time of adding the groove instability in the model.
+
+The stability & the amplitude of bar & spiral in the quasi-steady state for the two models is significantly different.  
+
+T = 150
+
+![danl6001_0_3](danl6001_0_3.png)
+
+![danl6001_3_5](danl6001_3_5.png)
+
+![danl6001_5_7](danl6001_5_7.png)
+
+T = 200
+
+![danl6002_0_3](danl6002_0_3.png)
+
+![danl6002_3_5](danl6002_3_5.png)
+
+![danl6002_5_7](danl6002_5_7.png)
+
+----
+
+## Conclusion
+
+#### The analyzed time scale is between 350 ~ 400, when the amplitude is generally stable for the model.
+
+1. the time of adding the groove into the model is important, the evolution of the amplitude still seems to be stochastic.
+2. Model No. 6001 (with groove added at T = 150) gives a weaker bar & comparable spiral, compared to original bar-spiral model: stronger bar strengthen the change of **angular momentum & Jacobi energy**.
+3. It is worth noting that in the change of E<sub>J</sub> of Model No. 6001 (with groove added at T = 150), there are two ridges in the figure (I will do this later).
