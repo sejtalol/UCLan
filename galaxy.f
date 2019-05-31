@@ -56,6 +56,10 @@ c Zhong Liu
       parameter(m_sp = 1000000)
       real mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)
       common /myanls/ mass, mang, mpe, mte
+      integer nw, tmpn
+      parameter (nw = 10000)
+      real myrad(nw), myomega(nw), mykappa(nw), mykappaz(nw)
+      common /myfrqs/ tmpn, myrad, myomega, mykappa, mykappaz
       integer nnsn
       real sn( m_sp * 3), snv( m_sp * 3 )
       real tmpcord(3)
@@ -169,10 +173,15 @@ c                print *, 'after step',istep
 c                write(nnsn)irun,'SNAP',istep,n_sp,(istep*ts)
 c                write(nnsn)(sn(iq),iq=1,n_sp*3)
 c                write(nnsn)(snv(iq),iq=1,n_sp*3)
-                write(nnsn)(mass(iq),iq=1, n_sp)
-                write(nnsn)(mang(iq),iq=1, n_sp)
-                write(nnsn)(mpe(iq),iq=1, n_sp)
-                write(nnsn)(mte(iq),iq=1, n_sp)
+             write(nnsn)(mass(iq),iq=1, n_sp)
+             write(nnsn)(mang(iq),iq=1, n_sp)
+             write(nnsn)(mpe(iq),iq=1, n_sp)
+             write(nnsn)(mte(iq),iq=1, n_sp)
+c write freqs parameters
+             write(nnsn) tmpn
+             do i=1,tmpn,1
+               write(nnsn) myrad(i), myomega(i), mykappa(i), mykappaz(i)
+             end do
         end if
         if( phys .and. master )then
           close( unit = nphys )

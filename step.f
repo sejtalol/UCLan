@@ -72,6 +72,10 @@ c common blocks by Zhong
       parameter(m_sp = 1000000)
       real mass(m_sp), mang(m_sp), mpe(m_sp), mte(m_sp)  
       common /myanls/ mass, mang, mpe, mte
+      integer nw, tmpn
+      parameter (nw = 10000)
+      real myrad(nw), myomega(nw), mykappa(nw), mykappaz(nw)
+      common /myfrqs/ tmpn, myrad, myomega, mykappa, mykappaz
 c local variables
       integer i, j, jst, n
       logical firsth
@@ -84,9 +88,16 @@ c
 c Zhong Jan 28 initialize
       if( phys ) then
               do i = 1, m_sp
-                mang( m_sp ) = 0.
-                mpe( m_sp ) = 0.
-                mte( m_sp ) = 0.
+                mang( i ) = 0.
+                mpe( i ) = 0.
+                mte( i ) = 0.
+              end do
+              tmpn = 0
+              do i = 1, nw
+                myrad( i ) = 0.
+                myomega( i ) = 0.
+                mykappa( i ) = 0.
+                mykappaz( i ) = 0.
               end do
       end if
 c initialize analysis if requested
