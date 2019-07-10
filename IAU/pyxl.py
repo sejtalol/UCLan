@@ -3,7 +3,6 @@
 
 import openpyxl
 import docx
-from docx.enum.text import WD_ALIGN_PARAGRAPH
 wb= openpyxl.load_workbook('user_new.xlsx')
 sheet = wb.get_sheet_by_name('Abstracts Information')
 doc = docx.Document()
