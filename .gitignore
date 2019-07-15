@@ -1,12 +1,8 @@
 #backupfile
-GALAXY_dEj_old.ipynb
+old_analysis
 #data file
 ptcls_info*.dat
-.vscode
-.vscode/settings.json
 data
-test
-#test_groove
-test_groove/data
-#data_bar
-#data_spiral
+IAU
+cheatsheets
+
