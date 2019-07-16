@@ -2,6 +2,7 @@
 old_analysis
 #data file
 ptcls_info*.dat
+*.dat
 data
 IAU
 cheatsheets
