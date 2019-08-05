@@ -22,7 +22,7 @@ DataBase = './data'
 
 #### READ FILE ####
 
-x, y, ang, da, Ej, dEj = mod.get_data(DataBase, str(nn), str(nn+dn), keyword, key_pattern)
+x, y, ang, da, Ej, dEj, flag = mod.get_data(DataBase, str(nn), str(nn+dn), keyword, key_pattern)
 
 #### BACK-UP DATA ####
 #output = open("test.dat", "w")
@@ -47,7 +47,7 @@ fig1.savefig('./output/d%s_%s_t%d_t%d.png'%(lab, keyword, nn, nn+dn))
 
 #### dEj/Ej - Ej #### hist2D
 fig2, ax2 = plt.subplots()
-mod.hist2d_plot(Ej, [dEj[i]/Ej[i] for i in range(len(Ej))], ej_x_min, ej_x_max, dej_y_min, dej_y_max, ax = ax2)
+mod.hist2d_plot(Ej, [mod.foo(dEj[i],Ej[i]) for i in range(len(Ej))], ej_x_min, ej_x_max, dej_y_min, dej_y_max, ax = ax2)
 lab = 'E_{J}'
 ax2.set_xlabel('$%s$'%(lab))
 ax2.set_ylabel('$\Delta %s / %s$'%(lab, lab))
@@ -65,7 +65,7 @@ fig3.savefig('./output/d%s_%s_t%d_t%d.png'%(lab, keyword, nn, nn+dn))
 
 #### dLZ/LZ - LZ #### hist2D
 fig4, ax4 = plt.subplots()
-mod.hist2d_plot(ang, [da[i]/ang[i] for i in range(len(ang))], lz_x_min, lz_x_max, dlz_y_min, dlz_y_max, ax = ax4)
+mod.hist2d_plot(ang, [mod.foo(da[i],ang[i]) for i in range(len(ang))], lz_x_min, lz_x_max, dlz_y_min, dlz_y_max, ax = ax4)
 lab = 'L_{Z}'
 ax4.set_xlabel('$%s$'%(lab))
 ax4.set_ylabel('$\Delta %s / %s$'%(lab, lab))
