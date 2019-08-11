@@ -56,5 +56,5 @@ ax3.set(ylabel = '$E_{J}$')
 plt.plot(orb_t, Ej)
 plt.setp(ax3.get_xticklabels(), visible = False)
 
-figname = 'Orb_no_%d_t%d_t%d'%(orbit_number, nn, nn+dn)
+figname = 'orb_no_%d_%s_%s'%(orbit_number, keyword, key_pattern)
 plt.savefig(figname)

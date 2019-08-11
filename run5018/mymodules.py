@@ -13,8 +13,8 @@ global bot_left_x, top_left_x, top_right_x, bot_right_x, bot_left_y, top_left_y,
 bot_left_x, top_left_x, top_right_x, bot_right_x = -2.0, -4.5, -1.0, -1.0
 bot_left_y, top_left_y, top_right_y, bot_right_y = -2.5, 3.0, 0.1, -0.1
 # spiral-spiral
-#bot_left_x, top_left_x, top_right_x, bot_right_x = -2.5, -3.5, -2.2, -2.2
-#bot_left_y, top_left_y, top_right_y, bot_right_y = -3.0, 3.0, 0.1, -0.1
+# bot_left_x, top_left_x, top_right_x, bot_right_x = -2.5, -3.5, -2.2, -2.2
+# bot_left_y, top_left_y, top_right_y, bot_right_y = -3.0, 3.0, 0.1, -0.1
 
 ################Function Block######################
 # 1. get angular momentum & jacobi energy
@@ -39,11 +39,11 @@ def get_data(filepath, arg1, arg2, key1, key2):     # arg1: initial time, arg2: 
         ang.append(ang1)
         da.append((ang2 - ang1))
         if(key2=='spiral'):
-            Ej1 = pe1[i]+0.5*(vx1[i]**2+vy1[i]**2+vz1[i]**2)+omega_spiral*(vx1[i]*y1[i]-vy1[i]*x1[i])-0.5*omega_spiral**2*np.sqrt(x1[i]**2+y1[i]**2)**2
-            Ej2 = pe2[i]+0.5*(vx2[i]**2+vy2[i]**2+vz2[i]**2)+omega_spiral*(vx2[i]*y2[i]-vy2[i]*x2[i])-0.5*omega_spiral**2*np.sqrt(x2[i]**2+y2[i]**2)**2
+            Ej1 = pe1[i]+0.5*(vx1[i]**2+vy1[i]**2+vz1[i]**2)-omega_spiral*(x1[i] * vy1[i] - y1[i] * vx1[i])
+            Ej2 = pe2[i]+0.5*(vx2[i]**2+vy2[i]**2+vz2[i]**2)-omega_spiral*(x2[i] * vy2[i] - y2[i] * vx2[i])
         elif(key2=='bar'):
-            Ej1 = pe1[i]+0.5*(vx1[i]**2+vy1[i]**2+vz1[i]**2)+omega_bar*(vx1[i]*y1[i]-vy1[i]*x1[i])-0.5*omega_bar**2*np.sqrt(x1[i]**2+y1[i]**2)**2
-            Ej2 = pe2[i]+0.5*(vx2[i]**2+vy2[i]**2+vz2[i]**2)+omega_bar*(vx2[i]*y2[i]-vy2[i]*x2[i])-0.5*omega_bar**2*np.sqrt(x2[i]**2+y2[i]**2)**2
+            Ej1 = pe1[i]+0.5*(vx1[i]**2+vy1[i]**2+vz1[i]**2)-omega_spiral*(x1[i] * vy1[i] - y1[i] * vx1[i])
+            Ej2 = pe2[i]+0.5*(vx2[i]**2+vy2[i]**2+vz2[i]**2)-omega_spiral*(x2[i] * vy2[i] - y2[i] * vx2[i])
         else:
             raise Exception('Please give the pattern speed keyword: bar, spiral. You used keyword:{}'.format(key2))
         Ej.append(Ej1)
@@ -90,7 +90,7 @@ def readFile(filepath):
         values = line.split()       # break each line into a list
         if (len(values) != 7):
             flag = flag +1
-            print('No. %6d particle lost some info in File %s!'%(n, filepath))
+            print('No. %6d particle lost some info in the data file!')
         else:
             x.append(float(values[0]))
             y.append(float(values[1]))
@@ -141,8 +141,10 @@ def hist2d_plot(x, y, x_min, x_max, y_min, y_max, ax):
 #   norm= matplotlib.colors.Normalize(vmin=0,vmax=5)
     H,xedges,yedges = np.histogram2d(y, x,bins=(100,100),range=([y_min, y_max],[x_min, x_max]))
     X,Y = np.meshgrid(xedges,yedges)
-    ax.imshow(np.log(H),interpolation='nearest',origin='lower', extent=[x_min, x_max, y_min, y_max], cmap=cm.get_cmap('jet'))
+    gci=ax.imshow(np.log(H),interpolation='nearest',origin='lower', extent=[x_min, x_max, y_min, y_max], cmap=cm.get_cmap('jet'))
     ax.grid(True)
+    plt.axis('auto')
+    return gci
 
 def kde_plot(x, y, x_min, x_max, y_min, y_max, ax):
     from sklearn.neighbors import KernelDensity
@@ -157,10 +159,25 @@ def kde_plot(x, y, x_min, x_max, y_min, y_max, ax):
     X, Y = np.mgrid[x_min:x_max:200j, y_min:y_max:200j]
     positions = np.vstack([X.ravel(), Y.ravel()])
     Z = np.reshape(np.exp(kde.score_samples(positions.T)), X.shape)
-    ax.imshow(np.rot90(Z), cmap = cmap, extent=[x_min, x_max, y_min, y_max])
+    gci=ax.imshow(np.rot90(Z), cmap = cmap, extent=[x_min, x_max, y_min, y_max])
 #   contour
     ax.contour(X, Y, Z)
     ax.grid(True)
+    plt.axis('auto')
+    return gci
+
+def xy_plot(x, y, z, x_min, x_max, y_min, y_max, bins, norm, ax):
+    from scipy.stats import binned_statistic_2d
+    cmap = plt.cm.get_cmap('Reds')
+    xbins = np.linspace(x_min,x_max, bins)
+    ybins = np.linspace(y_min,y_max, bins)
+    v = plt.axis()
+# histogram2d
+    H,xedges,yedges,binnum = binned_statistic_2d(y,x,z,statistic='mean',bins=(xbins,ybins),range = ([y_min,y_max],[x_min,x_max]))
+# pcolor
+    gci=ax.pcolor(xbins,ybins,H,cmap=cmap, norm=norm)
+    plt.axis('scaled')
+    return gci
 
     #### 5. rotate
 def rotate(x0, y0, vx0, vy0, phase):
@@ -203,6 +220,16 @@ def get_ej(x, y, vx, vy, vz, pe, keyword):
 #        raise Exception('Please give the pattern speed keyword: bar, spiral. You used keyword:{}'.format(keyword))
 #    return ej
 
+def get_phi_e(x, y, vx, vy, vz, pe, keyword):
+    phi_e = ()
+    if(keyword == 'spiral'):
+        phi_e = [pe[i]-omega_spiral*(x[i] * vy[i] - y[i] * vx[i]) for i in range(len(x))]
+    elif(keyword == 'bar'):
+        phi_e = [pe[i]-omega_bar*(x[i] * vy[i] - y[i] * vx[i]) for i in range(len(x))]
+    else:
+        raise Exception('Please give the pattern speed keyword: bar, spiral. You used keyword:{}'.format(keyword))
+    return phi_e
+
 #### 8. get one random orbit
 def get_orbit(filepath, arg1, arg2, x, y, flag):    # arg1: initial time, arg2: final time
     import random, os
@@ -229,7 +256,7 @@ def get_orbit(filepath, arg1, arg2, x, y, flag):    # arg1: initial time, arg2: 
     orb_pe = []
     path = 'orb_no_%7.7d.dat'%(orbit_number)
     if(not os.path.isfile(path)):
-        cmd = './orb_info %7.7d'%(orbit_number)
+        cmd = './orb_info_%7.7d'%(orbit_number)
         print('Creating NEW orbit file...')
         os.system(cmd)
     f = open(path, "r")
@@ -253,6 +280,18 @@ def foo(x, y):
         return x/y
     except ZeroDivisionError:
         return 0
+
+def plot_r(keyword, ax):
+    if(keyword == 'bar'):
+        r = CR_bar
+    elif(keyword == 'spiral'):
+        r = Sep
+    else:
+        r = int(input('please enter radius: '))
+    x = y = np.arange(-(r+0.1),(r+0.1),0.1)
+    x, y = np.meshgrid(x, y)
+    plt.contour(x,y,x**2+y**2, [r**2])
+
 ####################################################
 # read in time step from arg
 global xmin, xmax, ymin, ymax, omega_bar, omega_spiral, CR_bar, CR_spiral, Sep, R_max
